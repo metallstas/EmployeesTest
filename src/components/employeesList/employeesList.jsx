@@ -3,8 +3,8 @@ import './employeesList.css'
 
 const EmployeesList = ({data}) => {
 
-    const elements = data.map((el) => {
-        return <EmployeesListItem {...el}/>
+    const elements = data.map(({id, ...itemProps}) => {
+        return <EmployeesListItem key={id} {...itemProps}/>
     })
     return (
         <ul 
