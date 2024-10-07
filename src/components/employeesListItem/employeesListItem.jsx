@@ -23,7 +23,7 @@ class EmployeesListItem extends Component {
     }
 
     render() {
-    const {name, surname, salary} = this.props
+    const {name, surname, salary, onDelete} = this.props
     const {increase, promotion} = this.state
 
     const isIncrease = increase ? 'increase' : ''
@@ -45,7 +45,8 @@ class EmployeesListItem extends Component {
                 </button>
 
                 <button type="button"
-                        className="btn-trash btn-sm ">
+                        className="btn-trash btn-sm "
+                        onClick={onDelete}>
                     <i className="fas fa-trash"></i>
                 </button>
                 <i className="fas fa-star"></i>
