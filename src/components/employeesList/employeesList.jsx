@@ -7,7 +7,8 @@ const EmployeesList = ({data, onDelete}) => {
         return <EmployeesListItem 
                 key={id} 
                 {...itemProps}
-                onDelete={() => onDelete(id)}/>
+                onDelete={() => onDelete(id)}
+                />
     })
     return (
         <ul 

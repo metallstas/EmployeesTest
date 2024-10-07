@@ -5,16 +5,16 @@ class EmployeesListItem extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            increase: false,
+            // increase: false,
             promotion: false,
         }
     }
 
-    onIncrease = () => {
-        this.setState(({increase}) => ({
-            increase: !increase
-        }))
-    }
+    // onIncrease = () => {
+    //     this.setState(({increase}) => ({
+    //         increase: !increase
+    //     }))
+    // }
 
     promotion = () => {
         this.setState(({promotion}) => ({
@@ -23,8 +23,8 @@ class EmployeesListItem extends Component {
     }
 
     render() {
-    const {name, surname, salary, onDelete} = this.props
-    const {increase, promotion} = this.state
+    const {name, surname, salary, increase, onDelete} = this.props
+    const {promotion} = this.state
 
     const isIncrease = increase ? 'increase' : ''
     const isPromotion = promotion ? 'like' : '' 

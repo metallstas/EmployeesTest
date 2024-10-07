@@ -23,10 +23,19 @@ class App extends Component {
 
     deleteItem = (id) => {
         this.setState(({data}) => {
-            const newData = data.filter((el, i) => {
+            const newData = data.filter(el => {
                 return el.id !== +id
             })
 
+            return {
+                data: newData
+            }
+        })
+    }
+
+    addItem = (newEmployee) => {
+        this.setState(({data}) => {
+            const newData = [...data, newEmployee]
             return {
                 data: newData
             }
@@ -45,8 +54,12 @@ class App extends Component {
                     <Filter/>
                 </div>
     
-                <EmployeesList data={data} onDelete={this.deleteItem}/>
-                <EmployeesAddForm/>
+                <EmployeesList 
+                    data={data} 
+                    onDelete={this.deleteItem}
+                    />
+                <EmployeesAddForm
+                    addItem={this.addItem}/>
             </div>
         )
     }

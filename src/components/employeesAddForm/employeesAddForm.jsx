@@ -6,8 +6,8 @@ class EmployeesAddForm extends Component {
         super(props)
 
         this.state = {
-            firstName: '',
-            lastName: '',
+            name: '',
+            surname: '',
             salary: '',
         }
     }
@@ -18,25 +18,40 @@ class EmployeesAddForm extends Component {
         })
     }
 
+    submitForm = (e) => {
+        e.preventDefault()
+        const {name, surname, salary} = this.state
+        const id = Math.floor(Math.random() * 1000000)
+        const newEmpl = {
+            name,
+            surname,
+            salary,
+            id,
+            increase: false,
+        }
+        this.props.addItem(newEmpl)
+    }
+
     render() {
-        const {firstName, lastName, salary} = this.state
+        const {name, surname, salary} = this.state
 
         return (
             <div className="app-add-form">
                 <h3>Добавьте нового сотрудника</h3>
                 <form
-                    className="add-form d-flex">
+                    className="add-form d-flex"
+                    onSubmit={this.submitForm}>
                     <input type="text"
                         className="form-control new-post-label"
                         placeholder="Имя?"
-                        name="firstName"
-                        value={firstName}
+                        name="name"
+                        value={name}
                         onChange={this.onValueChange} />
                     <input type="text"
                         className="form-control new-post-label"
                         placeholder="Фамилия?"
-                        name="lastName"
-                        value={lastName}
+                        name="surname"
+                        value={surname}
                         onChange={this.onValueChange} />
                     <input type="number"
                         className="form-control new-post-label"
