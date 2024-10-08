@@ -1,11 +1,12 @@
 import './info.css'
 
-const Info = () => {
+const Info = ({countOfEmployees, rewardedEmployees}) => {
+
     return (
         <div className="info">
             <h1>Учет сотрудников в компании ЮСАТ</h1>
-            <h2>Общее число сотрудников: 5</h2>
-            <h2>Премию получат: 3 сотрудника</h2>
+            <h2>Общее число сотрудников: {countOfEmployees}</h2>
+            <h2>Премию получат: {rewardedEmployees}</h2>
         </div>
     )
 }

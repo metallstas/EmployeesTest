@@ -12,24 +12,50 @@ class EmployeesAddForm extends Component {
         }
     }
 
-    onValueChange = e => {
+    onValueChange = e => {  
+        if (e.target.name === 'name' || e.target.name === 'surname') {
+            if (e.target.value.match(/\d/g)) {
+                return
+            }
+        }
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    validateForm = () => {
+        const {name, salary, surname} = this.state
+        if (!name || !surname || !salary) {
+            return false
+        }
+        if (name.length < 2 || surname.length < 2) {
+            return false
+        }
+        return true
     }
 
     submitForm = (e) => {
         e.preventDefault()
         const {name, surname, salary} = this.state
         const id = Math.floor(Math.random() * 1000000)
+
+        if (!this.validateForm()) return
+
         const newEmpl = {
             name,
             surname,
             salary,
             id,
             increase: false,
+            promotion: false,
         }
         this.props.addItem(newEmpl)
+
+        this.setState({
+                name: '',
+                surname: '',
+                salary: '',
+            })
     }
 
     render() {
@@ -42,7 +68,7 @@ class EmployeesAddForm extends Component {
                     className="add-form d-flex"
                     onSubmit={this.submitForm}>
                     <input type="text"
-                        className="form-control new-post-label"
+                        className={"form-control new-post-label"}
                         placeholder="Имя?"
                         name="name"
                         value={name}

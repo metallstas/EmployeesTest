@@ -14,9 +14,9 @@ class App extends Component {
         super(props)
         this.state = {
             data: [
-                {name: 'John', surname: 'Smith', salary: 1500, increase: true, id: 1},
-                {name: 'Artur', surname: 'Morgan', salary: 350, increase: true, id: 2},
-                {name: 'Alex', surname: 'Vakovski', salary: 890, increase: false, id: 3},
+                {name: 'John', surname: 'Smith', salary: 1500, promotion: true, increase: true, id: 1},
+                {name: 'Artur', surname: 'Morgan', salary: 350, promotion: false, increase: true, id: 2},
+                {name: 'Alex', surname: 'Vakovski', salary: 890, promotion: false, increase: false, id: 3},
             ]
         }
     }
@@ -42,12 +42,26 @@ class App extends Component {
         })
     }
 
+    onToggleProp = (id, prop) => {
+        this.setState(({data}) => ({
+            data: data.map(el => {
+                if (el.id === id) {
+                    return {...el, [prop]: !el[prop]}
+                }
+                return el
+            })
+        }))
+    }
+
     render() {
         const {data} = this.state
+        const rewardedEmployees = data.filter(item => item.increase).length
 
         return (
             <div className="app">
-                <Info/>
+                <Info 
+                    countOfEmployees={data.length}
+                    rewardedEmployees={rewardedEmployees}/>
     
                 <div className="searchPanel">
                     <SearchPanel/>
@@ -55,8 +69,9 @@ class App extends Component {
                 </div>
     
                 <EmployeesList 
-                    data={data} 
+                    data={data}
                     onDelete={this.deleteItem}
+                    onToggleProp={this.onToggleProp}
                     />
                 <EmployeesAddForm
                     addItem={this.addItem}/>
