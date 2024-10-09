@@ -1,25 +1,27 @@
 import './filter.css'
 
-const Filter = () => {
+const Filter = ({onFilter, filter}) => {
+    const btnsData = [
+        {name: 'all', label: 'Все сотрудники'},
+        {name: 'promotion', label: 'На повышение'},
+        {name: 'more', label: 'З/П больше 1000$'},
+    ]
+
+    const buttons = btnsData.map(({name, label}) => {
+        const activeClass = filter === name ? 'btn-light' : 'btn-outline-light' 
+
+        return  (<button 
+                    className={`btn ${activeClass}`}
+                    type="button"
+                    key={name}
+                    onClick={() => onFilter(name)}>
+                        {label}
+                </button>)
+    })
+
     return (
         <div className="btn-group filter">
-            <button 
-                className="btn btn-light"
-                type="button">
-                    Все сотрудники
-            </button>
-
-            <button 
-                className="btn btn-outline-light"
-                type="button">
-                    На повышение
-            </button>
-
-            <button 
-                className="btn btn-outline-light"
-                type="button">
-                    З/П больше 1000$
-            </button>
+           {buttons}
         </div>
     )
 }
